@@ -16,15 +16,9 @@ const getAllProductsDB = async (searchTerm: string | undefined) => {
       ],
     });
 
-    // Throw error if there are no matches
-    if (results.length === 0) {
-      const error = {
-        success: false,
-        message: `No products found matching the search term ${searchTerm}!`,
-      };
-      throw error;
-    }
-    // RETURN RESULTS
+    return results;
+  } else {
+    const results = await ProductModel.find();
     return results;
   }
 };

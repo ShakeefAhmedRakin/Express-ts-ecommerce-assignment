@@ -37,6 +37,16 @@ const getAllProducts = async (req: Request, res: Response) => {
       | string
       | undefined;
     const result = await ProductServices.getAllProductsDB(searchTerm);
+
+    // Throw error if there are no matches
+    if (result.length === 0) {
+      const error = {
+        success: false,
+        message: `No products found matching the search term '${searchTerm}'`,
+      };
+      throw error;
+    }
+
     res.status(200).json({
       success: true,
       message: searchTerm

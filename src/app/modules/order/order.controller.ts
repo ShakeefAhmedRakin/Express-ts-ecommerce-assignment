@@ -35,6 +35,15 @@ const getAllOrders = async (req: Request, res: Response) => {
   try {
     const email: string | undefined = req.query.email as string | undefined;
     const result = await OrderServices.getAllOrdersDB(email);
+
+    if (result.length === 0) {
+      const error = {
+        success: false,
+        message: "Order not found",
+      };
+      throw error;
+    }
+
     res.status(200).json({
       success: true,
       message: email
