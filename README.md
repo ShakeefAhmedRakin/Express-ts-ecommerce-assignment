@@ -59,12 +59,23 @@ Replace `<username>`, `<password>`, and `<dbname>` with your MongoDB credentials
 
 ### Running the Application Locally
 
-1. Compile the TypeScript code to JavaScript:
+1. For development, start the application using:
+
+```bash
+npm run start:dev
+```
+
+2. To build the application, use:
+
+```bash
+tsc
+npm run build
+```
+
+3. For production, start the application using:
 
 ```bash
 npm run start:prod
-// or
-npm run start:dev
 ```
 
 The application will be running at `http://localhost:5000`.
