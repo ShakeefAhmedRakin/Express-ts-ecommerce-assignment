@@ -14,17 +14,32 @@ const getAllProductsDB = async (searchTerm: string | undefined) => {
         { description: { $regex: searchTerm, $options: "i" } },
         { category: { $regex: searchTerm, $options: "i" } },
       ],
+    }).select({
+      _id: 0,
+      __v: 0,
+      "variants._id": 0,
+      "inventory._id": 0,
     });
 
     return results;
   } else {
-    const results = await ProductModel.find();
+    const results = await ProductModel.find().select({
+      _id: 0,
+      __v: 0,
+      "variants._id": 0,
+      "inventory._id": 0,
+    });
     return results;
   }
 };
 
 const getProductByIdDB = async (id: string) => {
-  const result = await ProductModel.findById(id);
+  const result = await ProductModel.findById(id).select({
+    _id: 0,
+    __v: 0,
+    "variants._id": 0,
+    "inventory._id": 0,
+  });
   return result;
 };
 
