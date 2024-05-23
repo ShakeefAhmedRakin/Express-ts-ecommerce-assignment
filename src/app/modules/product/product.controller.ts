@@ -23,7 +23,7 @@ const createProduct = async (req: Request, res: Response) => {
       message: "Product created successfully!",
       data: product,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.message,
@@ -54,7 +54,7 @@ const getAllProducts = async (req: Request, res: Response) => {
         : `Products fetched successfully!`,
       data: result,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.message,
@@ -80,7 +80,7 @@ const getProductById = async (req: Request, res: Response) => {
       message: "Product fetched successfully!",
       data: result,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.message,
@@ -120,7 +120,7 @@ const updateProductById = async (req: Request, res: Response) => {
       message: "Product updated successfully!",
       data: product,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.message,
@@ -146,7 +146,7 @@ const deleteProductById = async (req: Request, res: Response) => {
       message: "Product deleted successfully!",
       data: null,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.message,
