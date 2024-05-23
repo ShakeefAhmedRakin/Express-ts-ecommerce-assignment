@@ -1,6 +1,7 @@
 import Joi from "joi";
+import { Order } from "./order.interface";
 
-const orderValidationSchema: Schema<Order> = Joi.object<Order>({
+const orderValidationSchema = Joi.object<Order>({
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required()
@@ -17,10 +18,10 @@ const orderValidationSchema: Schema<Order> = Joi.object<Order>({
     "number.positive": "Price must be a positive number",
     "any.required": "Price is required",
   }),
-  quantity: Joi.number().integer().min(1).required().messages({
+  quantity: Joi.number().integer().min(0).required().messages({
     "number.base": "Quantity must be a number",
     "number.integer": "Quantity must be a whole number",
-    "number.min": "Quantity must be at least 1",
+    "number.min": "Quantity must be at least 0",
     "any.required": "Quantity is required",
   }),
 });
