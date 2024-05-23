@@ -14,6 +14,9 @@ app.use((0, cors_1.default)());
 // Routes
 app.use("/api/products", product_route_1.ProductRoutes);
 app.use("/api/orders", order_route_1.OrderRoutes);
+app.get("/", (req, res) => {
+    res.send("E-Commerce TS is running");
+});
 app.all("*", (req, res) => {
     res.status(400).json({
         success: false,
