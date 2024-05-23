@@ -1,10 +1,20 @@
 import { Request, Response } from "express";
 import { ProductServices } from "./product.service";
 import { Product } from "./product.interface";
+import productValidationSchema from "./product.validation";
 
 const createProduct = async (req: Request, res: Response) => {
   try {
     const product: Product = req.body;
+
+    const { error } = productValidationSchema.validate(product);
+
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.details[0].message,
+      });
+    }
 
     const result = await ProductServices.createProductDB(product);
 
@@ -61,8 +71,16 @@ const updateProductById = async (req: Request, res: Response) => {
   try {
     const productId = req.params.productId;
     const product: Product = req.body;
-    console.log(productId);
-    console.log(product);
+
+    const { error } = productValidationSchema.validate(product);
+
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.details[0].message,
+      });
+    }
+
     const result = await ProductServices.updateProductByIdDB(
       productId,
       product
