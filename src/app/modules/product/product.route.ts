@@ -8,5 +8,6 @@ router.post("/", ProductControllers.createProduct);
 // Retrieve a List of All Products
 router.get("/", ProductControllers.getAllProducts);
 // Retrieve a Specific Product by ID
+router.get("/:productId", ProductControllers.getProductById);
 
 export const ProductRoutes = router;
