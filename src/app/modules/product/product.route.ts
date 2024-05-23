@@ -9,5 +9,7 @@ router.post("/", ProductControllers.createProduct);
 router.get("/", ProductControllers.getAllProducts);
 // Retrieve a Specific Product by ID
 router.get("/:productId", ProductControllers.getProductById);
+// Update Product Information
+router.put("/:productId", ProductControllers.updateProductById);
 
 export const ProductRoutes = router;

@@ -14,7 +14,10 @@ const createProduct = async (req: Request, res: Response) => {
       data: product,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -27,7 +30,10 @@ const getAllProducts = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -41,7 +47,30 @@ const getProductById = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const updateProductById = async (req: Request, res: Response) => {
+  try {
+    const productId = req.params.productId;
+    const product: Product = req.body;
+    console.log(productId);
+    console.log(product);
+    const result = await ProductServices.updateProductById(productId, product);
+    res.status(200).json({
+      success: true,
+      message: "Product updated successfully!",
+      data: product,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -49,4 +78,5 @@ export const ProductControllers = {
   createProduct,
   getAllProducts,
   getProductById,
+  updateProductById,
 };
