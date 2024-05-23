@@ -40,7 +40,7 @@ const getAllProducts = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: searchTerm
-        ? `Products matching search term '${searchTerm}' fetched successfully!"`
+        ? `Products matching search term '${searchTerm}' fetched successfully!`
         : `Products fetched successfully!`,
       data: result,
     });
@@ -56,9 +56,18 @@ const getProductById = async (req: Request, res: Response) => {
   try {
     const productId = req.params.productId;
     const result = await ProductServices.getProductByIdDB(productId);
+
+    // if product is not found
+    if (!result) {
+      const error = {
+        success: false,
+        message: "Product not found!",
+      };
+      throw error;
+    }
     res.status(200).json({
       success: true,
-      message: "Products fetched successfully!",
+      message: "Product fetched successfully!",
       data: result,
     });
   } catch (error) {
@@ -87,6 +96,15 @@ const updateProductById = async (req: Request, res: Response) => {
       productId,
       product
     );
+
+    // If product does not exist
+    if (!result) {
+      const error = {
+        success: false,
+        message: "Product does not exist!",
+      };
+      throw error;
+    }
     res.status(200).json({
       success: true,
       message: "Product updated successfully!",
@@ -104,6 +122,15 @@ const deleteProductById = async (req: Request, res: Response) => {
   try {
     const productId = req.params.productId;
     const result = await ProductServices.deleteProductByIdDB(productId);
+
+    if (!result.deletedCount) {
+      const error = {
+        success: false,
+        message: "Product does not exist!",
+      };
+      throw error;
+    }
+
     res.status(200).json({
       success: true,
       message: "Product deleted successfully!",

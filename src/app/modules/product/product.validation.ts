@@ -3,10 +3,10 @@ import { Inventory, Product, Variant } from "./product.interface";
 
 // Joi schema for the Inventory interface
 const inventoryValidationSchema = Joi.object<Inventory>({
-  quantity: Joi.number().required().positive().messages({
+  quantity: Joi.number().required().min(0).messages({
     "any.required": "Quantity is required",
     "number.base": "Quantity must be a number",
-    "number.positive": "Quantity must be a positive number",
+    "number.min": "Quantity must be at least zero",
   }),
   inStock: Joi.boolean().required().messages({
     "any.required": "InStock status is required",

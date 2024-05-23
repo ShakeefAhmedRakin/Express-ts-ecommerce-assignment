@@ -8,20 +8,29 @@ const createProductDB = async (product: Product) => {
 
 const getAllProductsDB = async (searchTerm: string | undefined) => {
   if (searchTerm) {
-    return await ProductModel.find({
+    const results = await ProductModel.find({
       $or: [
         { name: { $regex: searchTerm, $options: "i" } },
         { description: { $regex: searchTerm, $options: "i" } },
         { category: { $regex: searchTerm, $options: "i" } },
       ],
     });
-  } else {
-    return await ProductModel.find();
+
+    // Throw error if there are no matches
+    if (results.length === 0) {
+      const error = {
+        success: false,
+        message: `No products found matching the search term ${searchTerm}!`,
+      };
+      throw error;
+    }
+    // RETURN RESULTS
+    return results;
   }
 };
 
 const getProductByIdDB = async (id: string) => {
-  const result = await ProductModel.find({ _id: id });
+  const result = await ProductModel.findById(id);
   return result;
 };
 
