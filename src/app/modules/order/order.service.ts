@@ -52,15 +52,9 @@ const createOrderDB = async (order: Order) => {
 
 const getAllOrdersDB = async (email: string | undefined) => {
   if (email) {
-    return await OrderModel.find({ email: email }).select({
-      _id: 0,
-      __v: 0,
-    });
+    return await OrderModel.find({ email: email });
   } else {
-    return await OrderModel.find().select({
-      _id: 0,
-      __v: 0,
-    });
+    return await OrderModel.find();
   }
 };
 

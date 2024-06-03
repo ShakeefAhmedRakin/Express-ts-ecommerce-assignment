@@ -48,16 +48,10 @@ const createOrderDB = (order) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const getAllOrdersDB = (email) => __awaiter(void 0, void 0, void 0, function* () {
     if (email) {
-        return yield order_model_1.OrderModel.find({ email: email }).select({
-            _id: 0,
-            __v: 0,
-        });
+        return yield order_model_1.OrderModel.find({ email: email });
     }
     else {
-        return yield order_model_1.OrderModel.find().select({
-            _id: 0,
-            __v: 0,
-        });
+        return yield order_model_1.OrderModel.find();
     }
 });
 exports.OrderServices = {

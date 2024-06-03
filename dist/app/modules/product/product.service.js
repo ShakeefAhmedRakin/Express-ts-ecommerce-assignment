@@ -23,31 +23,16 @@ const getAllProductsDB = (searchTerm) => __awaiter(void 0, void 0, void 0, funct
                 { description: { $regex: searchTerm, $options: "i" } },
                 { category: { $regex: searchTerm, $options: "i" } },
             ],
-        }).select({
-            _id: 0,
-            __v: 0,
-            "variants._id": 0,
-            "inventory._id": 0,
         });
         return results;
     }
     else {
-        const results = yield product_model_1.ProductModel.find().select({
-            _id: 0,
-            __v: 0,
-            "variants._id": 0,
-            "inventory._id": 0,
-        });
+        const results = yield product_model_1.ProductModel.find();
         return results;
     }
 });
 const getProductByIdDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield product_model_1.ProductModel.findById(id).select({
-        _id: 0,
-        __v: 0,
-        "variants._id": 0,
-        "inventory._id": 0,
-    });
+    const result = yield product_model_1.ProductModel.findById(id);
     return result;
 });
 const updateProductByIdDB = (id, product) => __awaiter(void 0, void 0, void 0, function* () {
